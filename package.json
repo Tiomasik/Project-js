@@ -1,30 +1,33 @@
 {
-  "name": "goit-js-hw-11",
+  "name": "project",
   "version": "2.0.0",
-  "description": "Этот проект был создан при помощи Parcel. Для знакомства и настройки\r дополнительных возможностей [обратись к документации](https://parceljs.org/).",
-  "homepage": "https://github.com/Tiomasik/goit-js-hw-11/",
+  "description": "This project was created with Parcel. For familiarization and setting additional features [refer to documentation](https://parceljs.org/).",
+  "homepage": "https://goitacademy.github.io/project-js",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
+    "build": "parcel build src/*.html --public-url /project-js/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tiomasik/goit-js-hw-11.git"
+    "url": "git+https://github.com/Tiomasik/project-js.git"
   },
   "keywords": [],
-  "author": "Artem Maslii <a.masliy@ukr.net>",
+  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Tiomasik/goit-js-hw-11/"
+    "url": "https://github.com/Tiomasik/project-js"
   },
   "dependencies": {
+    "handlebars": "^4.7.7",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
+    "parcel-transformer-hbs": "^1.0.4",
     "posthtml-include": "^1.7.4"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "main": "index.js"
 }
