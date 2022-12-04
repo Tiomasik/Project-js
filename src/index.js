@@ -8,7 +8,7 @@ const refs = {
     cardGallery: document.querySelector('.gallery__films'),
 };
 let valueInput;
-let counter = 3;
+let counter = 10;
 
 console.log(refs.formEl)
 

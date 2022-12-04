@@ -16,10 +16,14 @@ async function asyncGetFilm(valueInput, counter) {
     try {
         const dataFilm = await getFilm(valueInput, counter);
         const dataCard = await dataFilm.json();
+        
+        if (!dataCard.results.length) {
+            throw new Error("Alarm!!!");
+        }
         console.log(dataCard)
-        return
-    } catch(error) {
+    } catch (error) {
         console.log(error)
+        console.log("Alarm!!!")
     }
 }
 
