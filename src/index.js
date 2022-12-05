@@ -1,16 +1,21 @@
 
-import { asyncGetFilm } from "./getApiFilm";
+import makeCard from "./template/get_card.hbs";
+import { asyncGetFilm, getGenre } from "./getApiFilm";
+export { getCard };
 //import getFilm from './getApiFilm'
 // import Film from './getApiFilm'
 
 const refs = {
     formEl: document.querySelector('.form'),
-    cardGallery: document.querySelector('.gallery__films'),
+    cardGallery: document.querySelector('.gallery .container'),
 };
 let valueInput;
 let counter = 10;
+const nameGenre = [];
+const ttt = [99, 80]
 
-console.log(refs.formEl)
+
+console.log(refs.cardGallery)
 
 refs.formEl.addEventListener('submit', sendForm);
 
@@ -19,42 +24,16 @@ function sendForm(evt) {
     evt.preventDefault();
     valueInput = evt.target.elements[0].value;
     console.log(valueInput)    // asyncGetAxios(valueInput, counter, maxOnPage)
-    asyncGetFilm(valueInput, counter)
+
+
+    asyncGetFilm(valueInput, counter, nameGenre, ttt)
 };
 
-// async function asyncGetFilm(valueInput) {
-//     try {
-//         const dataFilm = await getFilm(valueInput);
-//         const dataCard = await dataFilm.json();
-//         console.log(dataCard)
-//         return
-//     } catch(error) {
-//         console.log(error)
-//     }
-//     // try {
-//     //     const dataCard = await getFilm(valueInput)
+function getCard(resulte) {
+    refs.cardGallery.innerHTML = '';
+    console.log(resulte.results)
+    refs.cardGallery.innerHTML = resulte.results.map(makeCard).join('');
+}
 
-//     //     if (!dataCard.data.hits.length) {
-//     //         throw new Error("Alarm!!!");
-//     //     }
-//     //     if (counter < 2) {
-//     //         getCard(dataCard)
-//     //     return    
-//     //     }
-//     //     getCardMore(dataCard)
-//     // } catch(error) {
-//     //     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-//     //     clearAll()
-//     // }
-// }
 
-// function getFilm(valueInput) {
-//     const url = "https://api.themoviedb.org/3/movie/76341";
-//     const parameters = {
-//         key: '866c6d075a3e37e8cd8cfb5e85076bc4',
-//         nameFilm: valueInput,
-//     }
-//     const { key, nameFilm } = parameters;
-//     return fetch(`${url}?api_key=${key}`)
-// };
 

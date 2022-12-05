@@ -2,13 +2,16 @@ body {
     font-family: var(--main-font);
 }
 
+// .section {
+//     width: 100%;
+// }
+
 .container {
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px;
     position: relative;
-    border: solid 1px tomato;
-
+    border: 1px solid tomato;
 
     @media screen and (min-width: 480px) {
         width: 480px;
@@ -22,7 +25,7 @@ body {
     @media screen and (min-width: 1280px) {
         width: 1280px;
         padding: 0 32px;
+        padding-bottom: 45px;
         padding-top: 40px;
-        padding-bottom: 80px;
     }
 }
