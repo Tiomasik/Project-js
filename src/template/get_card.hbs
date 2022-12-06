@@ -1,23 +1,19 @@
 <div class="photo-card">
     <a class="gallery__item link" href="">
         <img class="img-card" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="" loading="lazy" />
-        <div class="info">
-            <p class="info-item">
+        <div class="info-item">
+            <p class="info-item__name">
                 {{title}}
             </p>
-            <p class="info-item">
-                {{title}}
-            </p>
-            <p class="info-item">
-                {{genre}}
-            </p>
+            <div class="info-item__desk">
+                <p class="info-item__genres">
+                    {{genres}}
+                </p>
+                <p class="info-item__date">
+                    {{year}}
+                </p>
+            </div>
         </div>
     </a>
     
 </div>
-
-{{!-- <div class="photo-card">
-    <p class="info-item">
-        Hello
-    </p>
-</div> --}}

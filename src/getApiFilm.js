@@ -8,7 +8,7 @@ function getGenre() {
         key: '866c6d075a3e37e8cd8cfb5e85076bc4',
     }
     const { key } = parameters;
-    return fetch(`${url}?api_key=${key}`).then(response => response.json())
+    return fetch(`${url}?api_key=${key}`)
 };
 
 function getFilm(valueInput, counter) {
@@ -18,31 +18,57 @@ function getFilm(valueInput, counter) {
         nameFilm: valueInput,
     }
     const { key, nameFilm } = parameters;
+    
     return fetch(`${url}?api_key=${key}&page=${counter}`)
     // return fetch(`${url}?api_key=${key}`)
 };
 
-async function asyncGetFilm(valueInput, counter, nameGenre, ttt) {
+async function asyncGetFilm(valueInput, counter, resultFilm, numberPages) {
     try {
-        const dataFilm = await getFilm(valueInput, counter);
-        const dataCard = await dataFilm.json();
-        
-        if (!dataCard.results.length) {
-            throw new Error("Alarm!!!");
-        }
-        getGenre().then(res => {
-        console.log(res.genres)
+        const promiseDataFilm = await getFilm(valueInput, counter);
+        const dataFilms = await promiseDataFilm.json();
+        const promiseDataGenre = await getGenre();
+        const dataGenre = await promiseDataGenre.json();
+
         try {
-            for (const tt of ttt) {
-            nameGenre.push(res.genres.find(genre => genre.id === tt).name)
-            console.log(nameGenre) 
-        }
+            resultFilm = dataFilms.results.map(film => {
+                const nameGenre = [];
+                let dataYear;
+
+                for (const genreID of film.genre_ids) {
+                    nameGenre.push(` ${dataGenre.genres.find(genre => genre.id === genreID).name}`)
+                }
+                dataYear = film.release_date.split("-")
+                film[`genres`] = nameGenre;
+                film[`year`] = dataYear[0];
+                return film
+            })
        
         } catch(error) {
             console.log(error) 
         }
-    }).catch(error => console.log(error))
-        getCard(dataCard)
+
+        if (!resultFilm.length || !dataGenre.genres.length) {
+            throw new Error("Alarm!!!");
+        }
+        let totalPages;
+        const numberPages = [];
+
+        if (dataFilms.total_pages >= 20) {
+            totalPages = 20;
+        } else {
+            totalPages = dataFilms.total_pages
+        }
+        
+        for (let i = ((totalPages / 2) - 2); i <= ((totalPages / 2) + 2); i += 1) {
+            const number = {};
+            number[`number`] = i;
+            console.log(number)
+            numberPages.push(number)
+            console.log(numberPages)
+        }
+
+        getCard(resultFilm, numberPages)
     } catch (error) {
         console.log(error)
         console.log("Alarm!!!")
