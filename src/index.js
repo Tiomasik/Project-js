@@ -23,7 +23,7 @@ const refs = {
 let valueInput;
 let counter = 8;
 const resultFilm = [];
-let totalPages;
+
 
 asyncGetFilm(valueInput, counter, resultFilm)
 

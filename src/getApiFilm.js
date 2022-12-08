@@ -64,6 +64,7 @@ async function asyncGetFilm(valueInput, counter, resultFilm, numberPages) {
 function getButtonGallery(dataFilms){
     
     const numberPages = [];
+    let totalPages;
 
     if (dataFilms.total_pages >= 20) {
         totalPages = 20;
