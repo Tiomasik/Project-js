@@ -1,19 +1,22 @@
 .footer .container {
     display: flex;
-    gap: 16px;
+    gap: 10px;
     justify-content: center;
 }
 
 .btn-list {
     display: flex;
-    gap: 4px;
+    gap: 10px;
     justify-content: center;
 }
 
 .btn-left,
+.btn-first,
 .btn-right,
-.btn-points-last,
-.btn-points {
+.btn-points-start,
+.btn-points-end,
+.btn-points,
+.footer-btn {
     width: 40px;
     height: 40px;
     display: flex;
@@ -24,7 +27,7 @@
     // background-size: contain;
 }
 
-.footer-btn {
-    width: 40px;
-    height: 40px;
-}
+// .footer-btn {
+//     width: 40px;
+//     height: 40px;
+// }

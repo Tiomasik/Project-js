@@ -63,16 +63,15 @@ async function asyncGetFilm(valueInput, counter, resultFilm, numberPages) {
 
 function getButtonGallery(dataFilms){
     
-        let totalPages;
-        const numberPages = [];
+    const numberPages = [];
 
-        if (dataFilms.total_pages >= 20) {
-            totalPages = 20;
-        } else {
-            totalPages = dataFilms.total_pages
-        }
+    if (dataFilms.total_pages >= 20) {
+        totalPages = 20;
+    } else {
+        totalPages = dataFilms.total_pages
+    }
         
-    for (let i = 1; i < totalPages; i += 1) {
+    for (let i = 1; i <= totalPages; i += 1) {
         const number = {};
         number[`number`] = i;
         console.log(number)
