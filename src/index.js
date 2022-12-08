@@ -1,7 +1,7 @@
 // import './sass/index.scss';
 import makeCard from "./template/get_card.hbs";
 import makeButton from "./template/get_button.hbs";
-// import makeLastButton from "./template/get_last_button.hbs";
+import makeLeftButton from "./template/get_left_button.hbs";
 import { asyncGetFilm } from "./getApiFilm";
 export { getCard };
 //import getFilm from './getApiFilm'
@@ -10,6 +10,7 @@ export { getCard };
 const refs = {
     formEl: document.querySelector('.form'),
     cardGallery: document.querySelector('.gallery .container'),
+    buttonGallery: document.querySelector('.footer .container'),
     cardBtn: document.querySelector('.btn-list'),
     pointLastBtn: document.querySelector('.link-last-points'),
     pointFirstBtn: document.querySelector('.link-first-points'),
@@ -20,6 +21,7 @@ const refs = {
 let valueInput;
 let counter = 1;
 const resultFilm = [];
+const resultButton = [1];
 
 asyncGetFilm(valueInput, counter, resultFilm)
 
@@ -39,10 +41,11 @@ function sendForm(evt) {
 
 function getCard(resultFilm, numberPages) {
     refs.cardGallery.innerHTML = '';
+    refs.cardGallery.innerHTML = '';
     console.log(resultFilm)
     console.log(numberPages)
     refs.cardGallery.innerHTML = resultFilm.map(makeCard).join('');
-    
+    console.log(resultButton.map(makeLeftButton).join(''))
     getCardButton(numberPages)
 }
 
@@ -56,15 +59,17 @@ function getCardButton(numberPages) {
         }
     }
     if (counter === 1) {
-    refs.buttonLeft.classList.toggle('visually-hidden')
+    // refs.buttonLeft.classList.toggle('visually-hidden')
     refs.pointFirstBtn.classList.toggle('visually-hidden')
     refs.cardBtn.insertAdjacentHTML("afterbegin", `<li class="link">
      <button type="button" class="footer-btn">${1}</button>
 </li>`);
     refs.pointLastBtn.insertAdjacentHTML("beforebegin", numberMiddlePages.map(makeButton).join(''));
     refs.cardBtn.insertAdjacentHTML("beforeend", `<li class="link">
-     <button type="button" class="footer-btn">${numberPages.length + 2}</button>
+     <button type="button" class="footer-btn">${numberPages.length + 1}</button>
 </li>`);
+        
+    refs.cardBtn.insertAdjacentHTML("beforeend", resultButton.map(makeLeftButton).join(''));
     // refs.pointLastBtn.classList.toggle('visually-hidden')
     }
 }
