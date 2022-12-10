@@ -79,6 +79,7 @@
     display: block;
     width: 336px;
     height: 28px;
+    margin-bottom: 20px;
 }
 
 .form__search__input {
@@ -123,4 +124,16 @@
             background-color: #FF001B;
         }
     }
+}
+
+.footer-error{
+    text-align: center;
+}
+
+.messege-error{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(16 / 14);
+    
+    color: #FF001B;
 }

@@ -23,8 +23,27 @@
     justify-content: center;
     align-items: center;
     padding: 0;
+    cursor: pointer;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 5px;
+
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: calc(16 / 12);
+    color: #000000;
+
+    &:hover {
+        background-color: #FF6B08;
+    }
     // background-repeat: no-repeat;
     // background-size: contain;
+}
+
+.btn-active {
+    background-color: #FF6B08;
+    color: #FFFFFF;
 }
 
 // .footer-btn {
