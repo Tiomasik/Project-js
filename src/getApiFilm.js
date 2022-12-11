@@ -146,8 +146,8 @@ function getButtonGallery(dataFilms){
     const numberPages = [];
     let totalPages;
 
-    if (dataFilms.total_pages >= 10) {
-        totalPages = 10;
+    if (dataFilms.total_pages >= 30) {
+        totalPages = 30;
     } else {
         totalPages = dataFilms.total_pages
     }

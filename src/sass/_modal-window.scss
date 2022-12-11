@@ -89,14 +89,12 @@
         padding: 48px 20px;
 
         @media screen and (min-width: 768px) {
-                padding: 40px 12px;
-            }
+            padding: 40px 36px;
+        }
         
-            @media screen and (min-width: 1280px) {
-                padding: 40px 12px;
-            }
-
-        
+        @media screen and (min-width: 1280px) {
+            padding: 40px 12px;
+        }   
     }
 }
 
@@ -121,15 +119,18 @@
 
         width: 240px;
         max-height: 357px;
+        margin-bottom: 20px;
 
         @media screen and (min-width: 768px) {
             width: 264px;
             max-height: 374px;
+            margin-bottom: 0;
         }
         
         @media screen and (min-width: 1280px) {
             width: 375px;
             max-height: 478px;
+            margin-bottom: 0;
         }
         
     }
@@ -137,10 +138,20 @@
     &__name {
         text-transform: uppercase;
         font-weight: 500;
-        font-size: 30px;
-        line-height: calc(35 / 30);
+        font-size: 20px;
+        line-height: calc(23 / 20);
 
         margin-bottom: 20px;
+
+        // @media screen and (min-width: 768px) {
+        //     font-size: 23px;
+        //     line-height: calc(35 / 30);
+        // }
+        
+        @media screen and (min-width: 1280px) {
+            font-size: 30px;
+            line-height: calc(35 / 30);
+        }
     }
 
     &__iten-info {
