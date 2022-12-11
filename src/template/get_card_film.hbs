@@ -1,0 +1,52 @@
+<div class="card-film">
+    <img class="card-film__img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="" loading="lazy" />
+    <div>
+        <ul class="list card-film__list">
+            <li>
+                <p class="card-film__name">
+                    {{title}}
+                </p>
+            </li>
+            <li>
+                <table class="card-film__table">
+                    <tbody>
+                        <tr>
+                            <td class="card-film__table-row-title">Vote / Votes</td>
+                            <td class="card-film__table-row-name">
+                                <ul class="list card-film__table-title">
+                                    <li class="list card-film__table-vote">{{vote_average}}</li>
+                                    <li class="list card-film__table-line"> / </li>
+                                    <li class="list card-film__table-votes">{{vote_count}}</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="card-film__table-row-title">Popularity</td>
+                            <td class="card-film__table-name">{{popularity}}</td>
+                        </tr>
+                        <tr>
+                            <td class="card-film__table-row-title">Original Title</td>
+                            <td class="card-film__table-name">{{original_title}}</td>
+                        </tr>
+                    </tbody>
+                    <tr>
+                        <td class="card-film__table-row-title">Genre</td>
+                        <td class="card-film__table-name">{{genres.name}}</td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                <p class="card-film__overview-name">About</p>
+                <p class="card-film__overview">
+                    {{overview}}
+                </p>
+            </li>
+            <li>
+                <div class="card-film__btn">
+                    <button class="card-film__btn-active">add to watched</button>
+                    <button class="card-film__btn-passive">add to queue</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

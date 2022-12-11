@@ -5,8 +5,32 @@
     background-repeat: no-repeat;
     background-position: top 0 center;
     background-size: cover;
-    background-image: url(../images/background@2x.png);
+    background-image: url(../images/background480.png);
+    height: 230px;
+
+    @media screen and (min-width: 768px) {
+        background-image: url(../images/background768.png);
+        height: 230px;
+    }
+        
+    @media screen and (min-width: 1280px) {
+        background-image: url(../images/background@2x.png);
+        height: 216px;
+    }
 }
+
+.header .container {
+    padding-bottom: 85px;
+
+    @media screen and (min-width: 768px) {
+            padding-bottom: 45px;
+    }
+    
+     @media screen and (min-width: 1280px) {
+            padding-bottom: 51px;
+    }
+}
+
 
 .nav {
     display: flex;

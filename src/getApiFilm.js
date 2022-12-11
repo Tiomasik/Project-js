@@ -1,5 +1,5 @@
 
-import { getCard, getMessegeError, cleartMessegeError } from "./index";
+import { getCard, getMessegeError, cleartMessegeError, getCardFullInfoFilm } from "./index";
 export { asyncGetFilm, getGenre, asyncGetSearchFilm, asyncGetInfoFilm };
 
 function getGenre() {
@@ -95,7 +95,7 @@ async function asyncGetInfoFilm(moviID) {
             throw new Error("Alarm!!!");
         }
      
-        console.log(infoFilm)
+        getCardFullInfoFilm(infoFilm)
     
     } catch (error) {
         console.log(error)
@@ -146,8 +146,8 @@ function getButtonGallery(dataFilms){
     const numberPages = [];
     let totalPages;
 
-    if (dataFilms.total_pages >= 50) {
-        totalPages = 50;
+    if (dataFilms.total_pages >= 10) {
+        totalPages = 10;
     } else {
         totalPages = dataFilms.total_pages
     }

@@ -9,23 +9,25 @@ body {
 .container {
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px;
+    padding: 20px 20px;
+    padding-bottom: 40px;
     position: relative;
     border: 1px solid tomato;
 
     @media screen and (min-width: 480px) {
         width: 480px;
+        
     }
 
     @media screen and (min-width: 768px) {
         width: 768px;
-        padding: 0 32px;
+        padding: 60px 32px;
     }
 
     @media screen and (min-width: 1280px) {
         width: 1280px;
         padding: 0 32px;
-        padding-bottom: 45px;
+        padding-bottom: 51px;
         padding-top: 40px;
     }
 }

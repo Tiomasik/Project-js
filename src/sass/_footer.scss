@@ -34,9 +34,9 @@
     line-height: calc(16 / 12);
     color: #000000;
 
-    &:hover {
-        background-color: #FF6B08;
-    }
+    // &:hover {
+    //     background-color: #FF6B08;
+    // }
     // background-repeat: no-repeat;
     // background-size: contain;
 }
@@ -46,7 +46,24 @@
     color: #FFFFFF;
 }
 
-// .footer-btn {
-//     width: 40px;
-//     height: 40px;
+// .btn-left,
+// .btn-right {
+//     background-color: #F7F7F7;
 // }
+
+.visually-hidden-mobile {
+
+    @media screen and (max-width: 769px) {
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        border: 0;
+        padding: 0;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        margin: -1px;
+    }
+
+}
