@@ -1,10 +1,7 @@
 export { getCardFilmInfo };
 
 function getCardFilmInfo(infoFilm, resultGenresFilm) {
-    return `<div class="card-film">
-    <img class="card-film__img" src="https://image.tmdb.org/t/p/w500${infoFilm.poster_path}" alt="" loading="lazy" />
-    <div>
-        <ul class="list card-film__list">
+    return `<ul class="list card-film__list">
             <li>
                 <p class="card-film__name">
                     ${infoFilm.title}
@@ -44,13 +41,5 @@ function getCardFilmInfo(infoFilm, resultGenresFilm) {
                     ${infoFilm.overview}
                 </p>
             </li>
-            <li>
-                <div class="card-film__btn">
-                    <button class="card-film__btn-active">add to watched</button>
-                    <button class="card-film__btn-passive">add to queue</button>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>`
+        </ul>`
 }

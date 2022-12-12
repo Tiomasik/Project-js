@@ -19,8 +19,80 @@
     }
 }
 
+.header-library {
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-position: top 0 center;
+    background-size: cover;
+    background-image: url(../images/background-mobile.png);
+    height: 230px;
+
+    @media screen and (min-width: 768px) {
+        background-image: url(../images/background-desktop.png);
+        height: 240px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        background-image: url(../images/background-laptop.png);
+        height: 226px;
+    }
+
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        margin-top: 0;
+    }
+
+        &__btn-active,
+        &__btn-passive {
+            padding: 8px 27px;
+            width: 148px;
+            height: 42px;
+    
+            border-radius: 5px;
+    
+            font-weight: 500;
+            font-size: 12px;
+            line-height: calc(16 / 12);
+            text-transform: uppercase;
+            cursor: pointer;
+
+            color: #FFFFFF;
+        }
+    
+        &__btn-active {
+            background-color: #FF6B01;
+            color: #ffffff;
+            border: transparent;
+    
+            &:hover,
+            &:focus {
+                background-color: transparent;
+                color: #ffffff;
+                border: 1px solid #ffffff;
+            }
+        }
+    
+        &__btn-passive {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+    
+            &:hover,
+            &:focus {
+                background-color: #FF6B01;
+                color: #ffffff;
+                border: transparent;
+            }
+        }
+}
+
 .header .container {
-    padding-bottom: 85px;
+    padding-bottom: 57px;
+    padding-top: 40px;
 
     @media screen and (min-width: 768px) {
             padding-bottom: 45px;
@@ -31,12 +103,29 @@
     }
 }
 
+.header-library .container {
+    padding-bottom: 47px;
+    padding-top: 40px;
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: 45px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        padding-bottom: 51px;
+    }
+}
+
 
 .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
+
+    @media screen and (max-width: 767px) {
+            margin-bottom: 60px;
+        }
 
     &__logo {
         display: flex;
@@ -49,6 +138,11 @@
             line-height: calc(35 / 30);
 
             color: #FFFFFF;
+
+            @media screen and (max-width: 767px) {
+                display: none;
+            }
+
             }
 
         &__icon {
@@ -133,21 +227,19 @@
 .current {
     position: relative;
 
-    @media screen and (min-width: 768px) {
-        &::after {
+    &::after {
             display: block;
             content: "";
-
+    
             position: absolute;
             left: 0;
             bottom: -3px;
-
+    
             width: 100%;
             height: 3px;
-
+    
             background-color: #FF001B;
         }
-    }
 }
 
 .footer-error{

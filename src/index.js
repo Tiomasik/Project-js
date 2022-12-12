@@ -6,10 +6,12 @@ import { asyncGetFilm } from "./getApiFilm";
 import { asyncGetSearchFilm, asyncGetInfoFilm } from "./getApiFilm";
 import { getActivButton } from "./counterButton";
 import { getCardFilmInfo } from "./getCardFilm";
+import { getCardFilmInfoImg } from "./getCardFilmImg";
 export { getCard, getMessegeError, cleartMessegeError, getCardFullInfoFilm };
 
 
 const refs = {
+    isHomePage: document.querySelector('.nav__list__link-home'),
     formEl: document.querySelector('.form'),
     cardGallery: document.querySelector('.gallery .container'),
     buttonGallery: document.querySelector('.footer .container'),
@@ -22,7 +24,10 @@ const refs = {
     buttonLast: document.querySelector('.block-last-btn'),
     messegeError: document.querySelector('.footer-error'),
     backdropWindow: document.querySelector('.backdrop'),
-    modalWindow: document.querySelector('.modal-wind__film'),
+    modalWindowImg: document.querySelector('.modal-wind__film-img'),
+    modalWindowList: document.querySelector('.modal-wind__film-list'),
+    buttonAddWatch: document.querySelector('.card-film__btn-active'),
+    buttonAddQueue: document.querySelector('.card-film__btn-passive'), 
 };
 
 let valueInput;
@@ -30,13 +35,36 @@ let counter = 1;
 const resultFilm = [];
 let nameSearch = 0
 let moviID
+const resultInfoFilmGenre = [];
+const resultInfoFilm = [];
+// const filmsWatch = [];
 
-asyncGetFilm(valueInput, counter, resultFilm)
+if (refs.isHomePage.classList.contains('current')) {
+    asyncGetFilm(valueInput, counter, resultFilm)
+} else {
+    refs.buttonFirst.classList.add('btn-active')
+    refs.buttonFirst.classList.remove('visually-hidden')
+    refs.buttonFirst.classList.remove('visually-hidden-mobile')
+    refs.buttonLast.classList.add('visually-hidden')
+    refs.buttonLast.classList.add('visually-hidden-mobile')
+    refs.buttonLeft.classList.add('visually-hidden')
+    refs.buttonLeft.classList.add('visually-hidden-mobile')
+    refs.buttonPointsStart.classList.add('visually-hidden')
+    refs.buttonPointsStart.classList.add('visually-hidden-mobile')
+    refs.buttonRight.classList.add('visually-hidden')
+    refs.buttonRight.classList.add('visually-hidden-mobile')
+    refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
+    refs.buttonPointsEnd.classList.add('visually-hidden')
+}
+
 
 refs.formEl.addEventListener('submit', sendForm);
 refs.buttonGallery.addEventListener('click', getNextForm);
 refs.cardGallery.addEventListener('click', getInfoFilm);
 refs.backdropWindow.addEventListener('click', closeModalWindow);
+
+refs.buttonAddWatch.addEventListener('click', addFilmWatch);
+refs.buttonAddQueue.addEventListener('click', addFilmQueue);
 // refs.closeBtnWindow.addEventListener('click', closeModalWindow);
 
 function getMessegeError() {
@@ -53,6 +81,22 @@ function getInfoFilm(evt) {
         moviID = Number(evt.target.dataset.filmid)
         asyncGetInfoFilm(moviID)
         refs.backdropWindow.classList.toggle('is-hidden') 
+}
+
+function addFilmWatch() {
+    // filmsWatch.splice(0, filmsWatch.length);
+    const filmsWatch = JSON.parse(localStorage.getItem("feedback-form-state"))
+    // console.log(filmsWatch)
+    // const filmAddWatch = filmsWatch.map(film => film)
+    filmsWatch.push(resultInfoFilm[0])
+    // console.log(filmsWatch)
+    localStorage.setItem("feedback-form-state", JSON.stringify(filmsWatch))
+    const filmAddWatch = JSON.parse(localStorage.getItem("feedback-form-state"))
+    console.log(filmAddWatch)
+}
+
+function addFilmQueue(evt) {
+   console.log(evt.target) 
 }
 
 function closeModalWindow(evt) {
@@ -131,13 +175,16 @@ function getCard(resultFilm, numberPages, event) {
 }
 
 function getCardFullInfoFilm(infoFilm) {
-    const resultInfoFilm = [];
-    resultInfoFilm.push(infoFilm.genres)
+    resultInfoFilmGenre.splice(0, resultInfoFilmGenre.length);
+    resultInfoFilmGenre.push(infoFilm.genres)
+    resultInfoFilm.splice(0, resultInfoFilm.length);
+    resultInfoFilm.push(infoFilm)
     console.log(resultInfoFilm)
-    const resultGenresFilm = resultInfoFilm[0].map(genre => genre.name);
+    const resultGenresFilm = resultInfoFilmGenre[0].map(genre => genre.name);
     // resultGenresFilm.push(infoFilm.genres)
     console.log(resultGenresFilm)
-    refs.modalWindow.innerHTML = getCardFilmInfo(infoFilm, resultGenresFilm)
+    refs.modalWindowList.innerHTML = getCardFilmInfo(infoFilm, resultGenresFilm)
+    refs.modalWindowImg.innerHTML = getCardFilmInfoImg(infoFilm)
     //refs.modalWindow.innerHTML = resultInfoFilm.map(makeCardFilm).join('');
 }
 

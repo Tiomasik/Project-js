@@ -1,4 +1,4 @@
-<section class="header section" id="headerID">
+<section class="header-library section" id="headerID">
     <div class="container">
         <nav class="nav">
             <div class="nav__logo">
@@ -12,15 +12,15 @@
             </div>
             <ul class="nav__list list">
                 <li class="nav__listlist__item">
-                    <a class="nav__list__link nav__list__link-home link current" href="./index.html">Home</a>
+                    <a class="nav__list__link nav__list__link-home link" href="./index.html">Home</a>
                 </li>
                 <li class="nav__list__item">
-                    <a class="nav__list__link link" href="./library.html">My library</a>
+                    <a class="nav__list__link link current" href="./library.html">My library</a>
                 </li>
             </ul>
         </nav>
-        <form class="form">
-            <label class="form__search">
+        <form class="form visually-hidden">
+            <label class="form__search ">
                 <input class="form__search__input" type="text" placeholder="Movie search" />
                 <button class="form__btn" type="submit">
                     <svg class="form__icon" width="12" height="12">
@@ -29,9 +29,16 @@
                 </button>
             </label>
         </form>
-        <div class="footer-error">
+        <ul class="header-library__list">
+            <li class="header-library__item">
+                <button type="button" class="header-library__btn-passive">Watched</button>
+            </li>
+            <li class="header-library__item">
+                <button type="button" class="header-library__btn-active">queue</button>
+            </li>
+        </ul>
+        <div class="footer-error visually-hidden">
             <p class="messege-error">Search result not successful. Enter the correct movie name</p>
         </div>
     </div>
 </section>
-
