@@ -171,6 +171,8 @@ function getGalleryBtn(numberPages) {
     if (numberPages.length < 8 && numberPages.length >= counter) {
         if (counter === 1 && numberPages.length !== counter) {
             refs.buttonFirst.classList.add('btn-active')
+            refs.buttonFirst.classList.remove('visually-hidden')
+            refs.buttonFirst.classList.remove('visually-hidden-mobile')
             refs.buttonLast.classList.add('visually-hidden')
             refs.buttonLeft.classList.add('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden')
@@ -216,6 +218,7 @@ function getGalleryBtn(numberPages) {
     else {
         if (counter == 1) {
             refs.buttonFirst.classList.add('btn-active')
+            refs.buttonFirst.classList.remove('visually-hidden-mobile')
             refs.buttonFirst.classList.remove('visually-hidden-mobile')
             refs.buttonLast.classList.remove('visually-hidden')
             refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
