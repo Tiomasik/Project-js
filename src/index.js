@@ -174,7 +174,9 @@ function getGalleryBtn(numberPages) {
             refs.buttonLast.classList.add('visually-hidden')
             refs.buttonLeft.classList.add('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden')
+            refs.buttonPointsStart.classList.add('visually-hidden-mobile')
             refs.buttonRight.classList.remove('visually-hidden')
+            refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
             refs.buttonPointsEnd.classList.add('visually-hidden')
             refs.buttonList.innerHTML = getActivButton(numberMiddlePages, counter)
             //refs.buttonList.insertAdjacentHTML("beforeend", numberMiddlePages.map(makeButton).join(''));
@@ -183,13 +185,17 @@ function getGalleryBtn(numberPages) {
             refs.buttonLast.classList.add('visually-hidden')
             refs.buttonLeft.classList.add('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden')
+            refs.buttonPointsStart.classList.add('visually-hidden-mobile')
             refs.buttonRight.classList.add('visually-hidden')
             refs.buttonPointsEnd.classList.add('visually-hidden')
+            refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
         } else if (counter > 1 && numberPages.length > counter) {
             refs.buttonFirst.classList.remove('btn-active')
             refs.buttonLast.classList.add('visually-hidden')
             refs.buttonLeft.classList.remove('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden')
+            refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
+            refs.buttonPointsStart.classList.add('visually-hidden-mobile')
             refs.buttonRight.classList.remove('visually-hidden')
             refs.buttonPointsEnd.classList.add('visually-hidden')
             refs.buttonList.innerHTML = getActivButton(numberMiddlePages, counter)
@@ -199,6 +205,8 @@ function getGalleryBtn(numberPages) {
             refs.buttonLast.classList.add('visually-hidden')
             refs.buttonLeft.classList.remove('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden')
+            refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
+            refs.buttonPointsStart.classList.add('visually-hidden-mobile')
             refs.buttonRight.classList.add('visually-hidden')
             refs.buttonPointsEnd.classList.add('visually-hidden')
             refs.buttonList.innerHTML = getActivButton(numberMiddlePages, counter)
@@ -208,6 +216,7 @@ function getGalleryBtn(numberPages) {
     else {
         if (counter == 1) {
             refs.buttonFirst.classList.add('btn-active')
+            refs.buttonFirst.classList.remove('visually-hidden-mobile')
             refs.buttonLast.classList.remove('visually-hidden')
             refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
             refs.buttonLeft.classList.add('visually-hidden')
@@ -221,6 +230,7 @@ function getGalleryBtn(numberPages) {
             //refs.buttonLast.insertAdjacentHTML("beforeend", `<button type="button" data-buttonid=1 class="footer-btn">${numberPages.length}</button>`);
         } else if (counter > 1 && counter < numberPages.length && counter < 5) { 
             refs.buttonFirst.classList.remove('btn-active')
+            refs.buttonFirst.classList.add('visually-hidden-mobile')
             refs.buttonLast.classList.remove('visually-hidden')
             refs.buttonPointsStart.classList.add('visually-hidden-mobile')
             refs.buttonPointsEnd.classList.add('visually-hidden-mobile')

@@ -2,12 +2,22 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+    align-items: center;
 }
 
 .btn-list {
     display: flex;
-    gap: 10px;
     justify-content: center;
+    align-items: center;
+    gap: 9px;
+
+    @media screen and (min-width: 768px) {
+        gap: 10px;
+    }
+    
+    @media screen and (min-width: 1280px) {
+        gap: 10px;
+    }
 }
 
 .btn-left,
@@ -34,11 +44,22 @@
     line-height: calc(16 / 12);
     color: #000000;
 
-    // &:hover {
-    //     background-color: #FF6B08;
-    // }
-    // background-repeat: no-repeat;
-    // background-size: contain;
+}
+
+.footer-btn,
+.btn-first {
+        width: 30px;
+        height: 30px;
+
+    @media screen and (min-width: 768px) {
+        width: 40px;
+        height: 40px;
+        }
+    
+        @media screen and (min-width: 1280px) {
+        width: 40px;
+        height: 40px
+        }
 }
 
 .btn-active {
