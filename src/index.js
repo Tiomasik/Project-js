@@ -218,7 +218,7 @@ function addFilmQueue() {
 
 
 function getGalleryQueue() {
-    if (JSON.parse(localStorage.getItem("watch-film"))) {
+    if (JSON.parse(localStorage.getItem("queue-film"))) {
        refs.cardGallery.innerHTML = getCardLibrary(JSON.parse(localStorage.getItem("queue-film")), JSON.parse(localStorage.getItem("queue-film-genre")))  
     } else {
     refs.cardGallery.innerHTML = ''
