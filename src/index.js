@@ -104,6 +104,7 @@ function getInfoFilm(evt) {
 }
 
 function addFilmWatch() {
+    if (JSON.parse(localStorage.getItem("watch-film"))) {
         const changeFilm = JSON.parse(localStorage.getItem("watch-film"))
         const changeFilmID = changeFilm.findIndex((film) => film.id === resultInfoFilm[0].id)
         if (changeFilmID < 0) {
@@ -127,6 +128,17 @@ function addFilmWatch() {
         } else {
             Notiflix.Notify.failure(`Sorry, this movie has already been added to your library "Watch".`);
         }
+    } else {
+        const filmsWatch = []
+        const filmGenreLibrary = []
+        filmsWatch.push(resultInfoFilm[0])
+        filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+        localStorage.setItem("watch-film", JSON.stringify(filmsWatch))
+        localStorage.setItem("watch-film-genre", JSON.stringify(filmGenreLibrary))
+        Notiflix.Notify.success(`This movie has been successfully added to your library "Watch".`);
+        refs.backdropWindow.classList.toggle('is-hidden')
+    }
+        
 }
 
 function deleteFilmWatch() {
@@ -166,29 +178,41 @@ function getGalleryWatch() {
     
 }
 function addFilmQueue() {
-    const changeFilm = JSON.parse(localStorage.getItem("queue-film"))
-    const changeFilmID = changeFilm.findIndex((film) => film.id === resultInfoFilm[0].id)
-    if (changeFilmID < 0) {
-        if (!JSON.parse(localStorage.getItem("queue-film"))) {
+    if (JSON.parse(localStorage.getItem("queue-film"))) {
+        const changeFilm = JSON.parse(localStorage.getItem("queue-film"))
+        const changeFilmID = changeFilm.findIndex((film) => film.id === resultInfoFilm[0].id)
+        if (changeFilmID < 0) {
+            if (!JSON.parse(localStorage.getItem("queue-film"))) {
+            const filmsWatch = []
+            const filmGenreLibrary = []
+            filmsWatch.push(resultInfoFilm[0])
+            filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+            localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
+            localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
+            } else {
+            const filmsWatch = JSON.parse(localStorage.getItem("queue-film"))
+            filmsWatch.push(resultInfoFilm[0])
+            const filmGenreLibrary = JSON.parse(localStorage.getItem("queue-film-genre"))
+            filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+            localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
+            localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
+            }
+            Notiflix.Notify.success(`This movie has been successfully added to your library "Queue".`);
+            refs.backdropWindow.classList.toggle('is-hidden')
+        } else {
+        Notiflix.Notify.failure(`Sorry, this movie has already been added to your library "Queue".`);
+        }
+    } else {
         const filmsWatch = []
         const filmGenreLibrary = []
         filmsWatch.push(resultInfoFilm[0])
         filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
         localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
         localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
-        } else {
-        const filmsWatch = JSON.parse(localStorage.getItem("queue-film"))
-        filmsWatch.push(resultInfoFilm[0])
-        const filmGenreLibrary = JSON.parse(localStorage.getItem("queue-film-genre"))
-        filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
-        localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
-        localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
-        }
         Notiflix.Notify.success(`This movie has been successfully added to your library "Queue".`);
         refs.backdropWindow.classList.toggle('is-hidden')
-    } else {
-        Notiflix.Notify.failure(`Sorry, this movie has already been added to your library "Queue".`);
     }
+    
 }
 
 
