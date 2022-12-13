@@ -85,4 +85,16 @@
     padding-right: 7px;
     margin-right: 7px;
    }
+
+   &__desk-library{
+    display: block;
+   }
+
+   &__desk-library &__genres {
+       border-color: transparent;
+   }
+}
+
+.info-item__desk-library .card-film__table-vote {
+    font-size: 16px;
 }

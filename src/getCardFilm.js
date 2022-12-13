@@ -41,5 +41,8 @@ function getCardFilmInfo(infoFilm, resultGenresFilm, videoFilm) {
                     ${infoFilm.overview}
                 </p>
             </li>
+            <li>
+                <a class="card-film__video link" href="https://www.youtube.com/watch?v=${videoFilm.results[0].key}" target="_blank" rel="noreferrer noopener">Video in YouTube</a>
+            </li>
         </ul>`
 }

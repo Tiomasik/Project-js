@@ -11,13 +11,17 @@ for (let i = 0; i < filmAddWatch.length; i += 1) {
             <p data-filmid="${filmAddWatch[i].id}" class="info-item__name">
                 ${filmAddWatch[i].title}
             </p>
-            <div data-filmid="${filmAddWatch[i].id}" class="info-item__desk">
+            <div data-filmid="${filmAddWatch[i].id}" class="info-item__desk info-item__desk-library">
                 <p data-filmid="${filmAddWatch[i].id}" class="info-item__genres">
                     ${filmGenreLibrary[i]}
                 </p>
                 <p data-filmid="${filmAddWatch[i].id}" class="info-item__date">
                     ${filmAddWatch[i].release_date.split("-")[0]}
                 </p>
+                <p data-filmid="${filmAddWatch[i].id}" class="list card-film__table-vote">
+                    ${filmAddWatch[i].vote_average}
+                </p>
+
             </div>
         </div>
     </a>

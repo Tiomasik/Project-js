@@ -12,7 +12,7 @@ function getGenre() {
 };
 
 function getFilm(valueInput, counter) {
-    const url = "https://api.themoviedb.org/3/trending/movie/day";
+    const url = "https://api.themoviedb.org/3/trending/movie/week";
     const parameters = {
         key: '866c6d075a3e37e8cd8cfb5e85076bc4',
         nameFilm: valueInput,

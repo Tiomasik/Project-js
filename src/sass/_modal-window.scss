@@ -235,6 +235,18 @@
         margin-bottom: 8px;
     }
 
+    &__video {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: calc(20 / 18);
+        color: #FF6B01;
+
+        &:hover,
+        &:focus {
+            color: #000000;
+        }
+    }
+
     &__overview {
         font-weight: 500;
         font-size: 12px;
@@ -280,24 +292,24 @@
              color: #ffffff;
              border: transparent;
     
-             &:hover,
-             &:focus {
-                 background-color: transparent;
-                 color: #000000;
-                 border: 1px solid #000000;
-             }
+            //  &:hover,
+            //  &:focus {
+            //      background-color: transparent;
+            //      color: #000000;
+            //      border: 1px solid #000000;
+            //  }
          }
     
          &__btn-passive {
              background-color: transparent;
              border: 1px solid #000000;
     
-             &:hover,
-             &:focus {
-                 background-color: #FF6B01;
-                 color: #ffffff;
-                 border: transparent;
-             }
+            //  &:hover,
+            //  &:focus {
+            //      background-color: #FF6B01;
+            //      color: #ffffff;
+            //      border: transparent;
+            //  }
          }
 
 }
