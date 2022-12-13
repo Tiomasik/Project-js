@@ -1,6 +1,6 @@
 export { getCardFilmInfo };
 
-function getCardFilmInfo(infoFilm, resultGenresFilm) {
+function getCardFilmInfo(infoFilm, resultGenresFilm, videoFilm) {
     return `<ul class="list card-film__list">
             <li>
                 <p class="card-film__name">

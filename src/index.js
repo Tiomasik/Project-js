@@ -1,4 +1,5 @@
 
+import Notiflix from 'notiflix';
 import makeCard from "./template/get_card.hbs";
 //import makeCardFilm from "./template/get_card_film.hbs";
 // import makeActivButton from "./template/get_activ_button_middle.hbs";
@@ -7,6 +8,7 @@ import { asyncGetSearchFilm, asyncGetInfoFilm } from "./getApiFilm";
 import { getActivButton } from "./counterButton";
 import { getCardFilmInfo } from "./getCardFilm";
 import { getCardFilmInfoImg } from "./getCardFilmImg";
+import { getCardLibrary } from "./getCardGalleryLibrary";
 export { getCard, getMessegeError, cleartMessegeError, getCardFullInfoFilm };
 
 
@@ -26,8 +28,11 @@ const refs = {
     backdropWindow: document.querySelector('.backdrop'),
     modalWindowImg: document.querySelector('.modal-wind__film-img'),
     modalWindowList: document.querySelector('.modal-wind__film-list'),
-    buttonAddWatch: document.querySelector('.card-film__btn-active'),
-    buttonAddQueue: document.querySelector('.card-film__btn-passive'), 
+    buttonAddWatch: document.querySelector('.card-film__btn .card-film__btn-active'),
+    buttonAddQueue: document.querySelector('.card-film__btn .card-film__btn-passive'),
+    buttonDelete: document.querySelector('.btn-delete'),
+    buttonWatchGallery: document.querySelector('.btn-watch'),
+    buttonQueueGallery: document.querySelector('.btn-queue'),
 };
 
 let valueInput;
@@ -55,6 +60,8 @@ if (refs.isHomePage.classList.contains('current')) {
     refs.buttonRight.classList.add('visually-hidden-mobile')
     refs.buttonPointsEnd.classList.add('visually-hidden-mobile')
     refs.buttonPointsEnd.classList.add('visually-hidden')
+    console.log(JSON.parse(localStorage.getItem("feedback-form-state")))
+    getGalleryWatch()
 }
 
 
@@ -65,6 +72,10 @@ refs.backdropWindow.addEventListener('click', closeModalWindow);
 
 refs.buttonAddWatch.addEventListener('click', addFilmWatch);
 refs.buttonAddQueue.addEventListener('click', addFilmQueue);
+refs.buttonDelete.addEventListener('click', deleteFilmWatch);
+
+refs.buttonWatchGallery.addEventListener('click', getGalleryWatch);
+refs.buttonQueueGallery.addEventListener('click', getGalleryQueue);
 // refs.closeBtnWindow.addEventListener('click', closeModalWindow);
 
 function getMessegeError() {
@@ -77,6 +88,15 @@ function cleartMessegeError() {
 
 function getInfoFilm(evt) {
     //console.log(evt.target.dataset.filmid)
+    if (refs.isHomePage.classList.contains('current')) {
+        refs.buttonAddWatch.classList.remove('visually-hidden')
+        refs.buttonAddQueue.classList.remove('visually-hidden')
+        refs.buttonDelete.classList.add('visually-hidden')
+    } else {
+        refs.buttonAddWatch.classList.add('visually-hidden')
+        refs.buttonAddQueue.classList.add('visually-hidden')
+        refs.buttonDelete.classList.remove('visually-hidden')
+    }
     evt.preventDefault();
         moviID = Number(evt.target.dataset.filmid)
         asyncGetInfoFilm(moviID)
@@ -84,19 +104,103 @@ function getInfoFilm(evt) {
 }
 
 function addFilmWatch() {
-    // filmsWatch.splice(0, filmsWatch.length);
-    const filmsWatch = JSON.parse(localStorage.getItem("feedback-form-state"))
-    // console.log(filmsWatch)
-    // const filmAddWatch = filmsWatch.map(film => film)
-    filmsWatch.push(resultInfoFilm[0])
-    // console.log(filmsWatch)
-    localStorage.setItem("feedback-form-state", JSON.stringify(filmsWatch))
-    const filmAddWatch = JSON.parse(localStorage.getItem("feedback-form-state"))
-    console.log(filmAddWatch)
+        const changeFilm = JSON.parse(localStorage.getItem("watch-film"))
+        const changeFilmID = changeFilm.findIndex((film) => film.id === resultInfoFilm[0].id)
+        if (changeFilmID < 0) {
+            if (!JSON.parse(localStorage.getItem("watch-film"))) {
+            const filmsWatch = []
+            const filmGenreLibrary = []
+            filmsWatch.push(resultInfoFilm[0])
+            filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+            localStorage.setItem("watch-film", JSON.stringify(filmsWatch))
+            localStorage.setItem("watch-film-genre", JSON.stringify(filmGenreLibrary))
+            } else {
+            const filmsWatch = JSON.parse(localStorage.getItem("watch-film"))
+            filmsWatch.push(resultInfoFilm[0])
+            const filmGenreLibrary = JSON.parse(localStorage.getItem("watch-film-genre"))
+            filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+            localStorage.setItem("watch-film", JSON.stringify(filmsWatch))
+            localStorage.setItem("watch-film-genre", JSON.stringify(filmGenreLibrary))
+            }
+            Notiflix.Notify.success(`This movie has been successfully added to your library "Watch".`);
+            refs.backdropWindow.classList.toggle('is-hidden')
+        } else {
+            Notiflix.Notify.failure(`Sorry, this movie has already been added to your library "Watch".`);
+        }
 }
 
-function addFilmQueue(evt) {
-   console.log(evt.target) 
+function deleteFilmWatch() {
+    if (refs.buttonDelete.classList.contains('is-watch-gallery')) {
+        const filmsWatch = JSON.parse(localStorage.getItem("watch-film"))
+        const filmGenreLibrary = JSON.parse(localStorage.getItem("watch-film-genre"))
+        const filmID = filmsWatch.findIndex((film) => film.id === resultInfoFilm[0].id)
+        filmsWatch.splice(filmID, 1)
+        filmGenreLibrary.splice(filmID, 1)
+        localStorage.setItem("watch-film", JSON.stringify(filmsWatch))
+        localStorage.setItem("watch-film-genre", JSON.stringify(filmGenreLibrary))
+
+        getGalleryWatch()  
+    } else {
+        const filmsWatch = JSON.parse(localStorage.getItem("queue-film"))
+        const filmGenreLibrary = JSON.parse(localStorage.getItem("queue-film-genre"))
+        const filmID = filmsWatch.findIndex((film) => film.id === resultInfoFilm[0].id)
+        filmsWatch.splice(filmID, 1)
+        filmGenreLibrary.splice(filmID, 1)
+        localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
+        localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
+
+        getGalleryQueue()
+    }
+    
+    refs.backdropWindow.classList.toggle('is-hidden')
+}
+
+function getGalleryWatch() {
+    if (JSON.parse(localStorage.getItem("watch-film"))) {
+       refs.cardGallery.innerHTML = getCardLibrary(JSON.parse(localStorage.getItem("watch-film")), JSON.parse(localStorage.getItem("watch-film-genre")))  
+    } else {
+    refs.cardGallery.innerHTML = ''
+    }
+
+    refs.buttonDelete.classList.add('is-watch-gallery')
+    
+}
+function addFilmQueue() {
+    const changeFilm = JSON.parse(localStorage.getItem("queue-film"))
+    const changeFilmID = changeFilm.findIndex((film) => film.id === resultInfoFilm[0].id)
+    if (changeFilmID < 0) {
+        if (!JSON.parse(localStorage.getItem("queue-film"))) {
+        const filmsWatch = []
+        const filmGenreLibrary = []
+        filmsWatch.push(resultInfoFilm[0])
+        filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+        localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
+        localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
+        } else {
+        const filmsWatch = JSON.parse(localStorage.getItem("queue-film"))
+        filmsWatch.push(resultInfoFilm[0])
+        const filmGenreLibrary = JSON.parse(localStorage.getItem("queue-film-genre"))
+        filmGenreLibrary.push(resultInfoFilm[0].genres.map(genre => genre.name))
+        localStorage.setItem("queue-film", JSON.stringify(filmsWatch))
+        localStorage.setItem("queue-film-genre", JSON.stringify(filmGenreLibrary))
+        }
+        Notiflix.Notify.success(`This movie has been successfully added to your library "Queue".`);
+        refs.backdropWindow.classList.toggle('is-hidden')
+    } else {
+        Notiflix.Notify.failure(`Sorry, this movie has already been added to your library "Queue".`);
+    }
+}
+
+
+
+function getGalleryQueue() {
+    if (JSON.parse(localStorage.getItem("watch-film"))) {
+       refs.cardGallery.innerHTML = getCardLibrary(JSON.parse(localStorage.getItem("queue-film")), JSON.parse(localStorage.getItem("queue-film-genre")))  
+    } else {
+    refs.cardGallery.innerHTML = ''
+    }
+
+    refs.buttonDelete.classList.remove('is-watch-gallery')
 }
 
 function closeModalWindow(evt) {
@@ -174,7 +278,7 @@ function getCard(resultFilm, numberPages, event) {
     getGalleryBtn(numberPages)
 }
 
-function getCardFullInfoFilm(infoFilm) {
+function getCardFullInfoFilm(infoFilm, videoFilm) {
     resultInfoFilmGenre.splice(0, resultInfoFilmGenre.length);
     resultInfoFilmGenre.push(infoFilm.genres)
     resultInfoFilm.splice(0, resultInfoFilm.length);
@@ -183,7 +287,7 @@ function getCardFullInfoFilm(infoFilm) {
     const resultGenresFilm = resultInfoFilmGenre[0].map(genre => genre.name);
     // resultGenresFilm.push(infoFilm.genres)
     console.log(resultGenresFilm)
-    refs.modalWindowList.innerHTML = getCardFilmInfo(infoFilm, resultGenresFilm)
+    refs.modalWindowList.innerHTML = getCardFilmInfo(infoFilm, resultGenresFilm, videoFilm)
     refs.modalWindowImg.innerHTML = getCardFilmInfoImg(infoFilm)
     //refs.modalWindow.innerHTML = resultInfoFilm.map(makeCardFilm).join('');
 }

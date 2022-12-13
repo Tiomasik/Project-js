@@ -34,6 +34,17 @@ function getRequestFilm(moviID) {
     // return fetch(`${url}?api_key=${key}`)
 };
 
+function getRequestVideo(moviID) {
+    const url = `https://api.themoviedb.org/3/movie/${moviID}/videos`;
+    const parameters = {
+        key: '866c6d075a3e37e8cd8cfb5e85076bc4',
+    }
+    const { key } = parameters;
+    
+    return fetch(`${url}?api_key=${key}`)
+    // return fetch(`${url}?api_key=${key}`)
+};
+
 function getFilmSearch(valueInput, counter) {
     const url = "https://api.themoviedb.org/3/search/movie";
     const parameters = {
@@ -90,12 +101,15 @@ async function asyncGetInfoFilm(moviID) {
     try {
         const promiseInfoFilm = await getRequestFilm(moviID);
         const infoFilm = await promiseInfoFilm.json();
+        const promiseVideoFilm = await getRequestVideo(moviID);
+        const videoFilm = await promiseVideoFilm.json();
 
         if (moviID !== infoFilm.id) {
             throw new Error("Alarm!!!");
         }
-     
-        getCardFullInfoFilm(infoFilm)
+        
+        console.log(videoFilm)
+        getCardFullInfoFilm(infoFilm, videoFilm)
     
     } catch (error) {
         console.log(error)
