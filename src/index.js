@@ -176,7 +176,12 @@ function getGalleryWatch() {
 
     refs.buttonDelete.classList.add('is-watch-gallery')
     
+    refs.buttonQueueGallery.classList.remove('header-library__btn-active')
+    refs.buttonQueueGallery.classList.add('header-library__btn-passive')
+    refs.buttonWatchGallery.classList.remove('header-library__btn-passive')
+    refs.buttonWatchGallery.classList.add('header-library__btn-active')
 }
+
 function addFilmQueue() {
     if (JSON.parse(localStorage.getItem("queue-film"))) {
         const changeFilm = JSON.parse(localStorage.getItem("queue-film"))
@@ -225,6 +230,10 @@ function getGalleryQueue() {
     }
 
     refs.buttonDelete.classList.remove('is-watch-gallery')
+    refs.buttonQueueGallery.classList.add('header-library__btn-active')
+    refs.buttonQueueGallery.classList.remove('header-library__btn-passive')
+    refs.buttonWatchGallery.classList.add('header-library__btn-passive')
+    refs.buttonWatchGallery.classList.remove('header-library__btn-active')
 }
 
 function closeModalWindow(evt) {

@@ -70,24 +70,24 @@
             color: #ffffff;
             border: transparent;
     
-            &:hover,
-            &:focus {
-                background-color: transparent;
-                color: #ffffff;
-                border: 1px solid #ffffff;
-            }
+            // &:hover,
+            // &:focus {
+            //     background-color: transparent;
+            //     color: #ffffff;
+            //     border: 1px solid #ffffff;
+            // }
         }
     
         &__btn-passive {
             background-color: transparent;
             border: 1px solid #ffffff;
     
-            &:hover,
-            &:focus {
-                background-color: #FF6B01;
-                color: #ffffff;
-                border: transparent;
-            }
+            // &:hover,
+            // &:focus {
+            //     background-color: #FF6B01;
+            //     color: #ffffff;
+            //     border: transparent;
+            // }
         }
 }
 
